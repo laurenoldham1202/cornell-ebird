@@ -1,8 +1,12 @@
+.footer-row {
+  display: flex;
+}
+
 .months {
   display: flex;
   padding: 0 1rem 0.5rem 0.5rem;
   justify-content: space-between;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
 }
 
 .play-btn {
@@ -12,8 +16,4 @@
 
 .slider {
   width: 100%;
-}
-
-.slider-row {
-  display: flex;
 }
