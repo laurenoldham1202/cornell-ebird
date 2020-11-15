@@ -35,30 +35,36 @@ export class SliderComponent implements OnInit {
     // this.sliderService.updateWeek(week.value);
   }
 
+  // var refreshId = setInterval(function() {
+  //   var properID = CheckReload();
+  //   if (properID > 0) {
+  //     clearInterval(refreshId);
+  //   }
+  // }, 10000);
+
   playAnimation() {
     this.activePlay = !this.activePlay;
 
     // if (this.activePlay) {
       // TODO add option to not autoplay
       // begin play count at current slider position
-      let count = this.week;
+      // let count = this.week;
 
-      setInterval(() => {
+      const animation = setInterval(() => {
 
 
         if (this.activePlay) {
           // reset to week 1 automatically
-          if (count > 51) {
-            count = 1;
+          if (this.week > 51) {
+            this.week = 1;
           }
           // add to current week count
-          count++;
-          console.log(count);
-
-
+          this.week++;
 
           // update app-wide
-          this.updateWeek(count);
+          this.updateWeek(this.week);
+        } else {
+          clearInterval(animation);
         }
       }, 250);
 
