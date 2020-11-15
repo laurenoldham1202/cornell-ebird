@@ -1,5 +1,5 @@
 <div class="footer-row">
-  <mat-icon color="accent" class="play-btn">play_arrow</mat-icon>
+  <mat-icon color="accent" class="play-btn" (click)="playAnimation()">{{activePlay ? 'pause' : 'play_arrow'}}</mat-icon>
   <div class="slider">
     <mat-slider
       class="slider"

@@ -15,6 +15,8 @@ export class SliderComponent implements OnInit {
     showSelectionBar: true,
   };
 
+  activePlay = false;
+
   constructor(
     private sliderService: SliderService,
   ) { }
@@ -22,8 +24,44 @@ export class SliderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  updateWeek(value: number) {
+    this.week = value;
+    this.sliderService.updateWeek(this.week);
+  }
+
   onSliderChange(week) {
-    this.sliderService.updateWeek(week.value);
+    this.updateWeek(week.value);
+    // this.week = week.value;
+    // this.sliderService.updateWeek(week.value);
+  }
+
+  playAnimation() {
+    this.activePlay = !this.activePlay;
+
+    // if (this.activePlay) {
+      // TODO add option to not autoplay
+      // begin play count at current slider position
+      let count = this.week;
+
+      setInterval(() => {
+
+
+        if (this.activePlay) {
+          // reset to week 1 automatically
+          if (count > 51) {
+            count = 1;
+          }
+          // add to current week count
+          count++;
+          console.log(count);
+
+
+
+          // update app-wide
+          this.updateWeek(count);
+        }
+      }, 250);
+
   }
 
 }
