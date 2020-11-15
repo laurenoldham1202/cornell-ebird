@@ -44,7 +44,7 @@ export class MapComponent implements OnInit {
         'source': 'birds',
         'paint': {
           'fill-opacity': 0.95,
-          'fill-outline-color': '#EEE',
+          // 'fill-outline-color': '#EEE',
           'fill-color': [
             'interpolate',
             ['linear'],
