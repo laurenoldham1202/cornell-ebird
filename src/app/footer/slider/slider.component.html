@@ -1,14 +1,18 @@
-<mat-slider
-  class="slider"
-  [value]="week"
-  (input)="onSliderChange($event)"
-  min="1"
-  max="52"
-  tickInterval="1"
-  step="1"
-  thumbLabel="false">
-</mat-slider>
-<div class="months" style="">
+<div class="slider-row">
+  <mat-icon color="accent" class="play-btn">play_arrow</mat-icon>
+
+  <mat-slider
+    class="slider"
+    [value]="week"
+    (input)="onSliderChange($event)"
+    min="1"
+    max="52"
+    tickInterval="1"
+    step="1"
+    thumbLabel="false">
+  </mat-slider>
+</div>
+<div class="months">
   <span>J</span>
   <span>F</span>
   <span>M</span>
