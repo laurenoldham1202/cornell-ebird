@@ -73,11 +73,11 @@ export class MapComponent implements OnInit {
 
       this.map.setFilter('birds', ['>', 'stats_week_1', 0]);
 
-      console.log(this.map.getSource('birds'));
+      // console.log(this.map.getSource('birds'));
 
       this.sliderService.week$.subscribe((week: number) => {
         // console.log(this.data.features[10]);
-        console.log(this.data.features[10].properties[`stats_week_${week}`]);
+        // console.log(this.data.features[10].properties[`stats_week_${week}`]);
         // 0 - 3.4
         this.map.setPaintProperty('birds', 'fill-color',
           [
