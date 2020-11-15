@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material/material.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
