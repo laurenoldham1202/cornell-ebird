@@ -48,7 +48,6 @@ export class MapComponent implements OnInit {
         'source': 'birds',
         'paint': {
           'fill-opacity': 0.95,
-          // 'fill-outline-color': '#EEE',
           'fill-color': [
             'interpolate',
             ['linear'],
@@ -77,13 +76,8 @@ export class MapComponent implements OnInit {
 
       this.map.setFilter('birds', ['>', 'stats_week_1', 0]);
 
-      // console.log(this.map.getSource('birds'));
-
       this.sliderService.week$.subscribe((week: number) => {
         this.week = week;
-        // console.log(this.data.features[10]);
-        // console.log(this.data.features[10].properties[`stats_week_${week}`]);
-        // 0 - 3.4
         this.map.setPaintProperty('birds', 'fill-color',
           [
             'interpolate',
@@ -131,6 +125,7 @@ export class MapComponent implements OnInit {
       });
 
 
+      // TODO change birds layer cursor
       this.map.on('click', 'birds', (e) => {
         // console.log(e.features[0].properties);
         const props = e.features[0].properties;
