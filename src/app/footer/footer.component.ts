@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MapService} from '../map/map.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  highlights; // TODO type
+
+  constructor(
+    private mapService: MapService,
+  ) { }
 
   ngOnInit(): void {
+    this.mapService.highlights$.subscribe(highlights => {
+      if (highlights) {
+        this.highlights = highlights;
+      }
+    });
   }
 
 }

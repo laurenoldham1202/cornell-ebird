@@ -5,6 +5,7 @@ import * as M from 'mapbox-gl';
 // @ts-ignore
 import * as data from 'src/assets/michigan-hex-update.json';
 import { SliderService } from '../footer/slider/slider.service';
+import {MapService} from './map.service';
 
 @Component({
   selector: 'app-map',
@@ -20,6 +21,7 @@ export class MapComponent implements OnInit {
   week: number;
 
   constructor(
+    private mapService: MapService,
     private sliderService: SliderService,
   ) { }
 
@@ -110,11 +112,28 @@ export class MapComponent implements OnInit {
         // TODO make fn for stats_week
         this.map.setFilter('birds', ['>', `stats_week_${week}`, 0]);
 
+        const values = [];
+        // console.log(this.data);
+        this.data.features.forEach(feature => {
+          // console.log(feature.properties);
+          values.push(feature.properties[`stats_week_${week}`]);
+        });
+
+        const highlights = {
+          min: Math.min(...values).toFixed(3),
+          max: Math.max(...values).toFixed(3),
+          count: week,
+          mean: this.mean(values).toFixed(3),
+          hexSelected: false,
+        };
+        // console.log(highlights);
+        this.mapService.updateHighlights(highlights);
+
       });
 
 
       this.map.on('click', 'birds', (e) => {
-        console.log(e.features[0].properties);
+        // console.log(e.features[0].properties);
         const props = e.features[0].properties;
         const values = [];
         Object.entries(props).forEach(([key, value]) => {
@@ -123,15 +142,19 @@ export class MapComponent implements OnInit {
           }
         });
 
-        console.log('min: ', Math.min(...values));
-        console.log('min: ', Math.max(...values));
-        console.log('mean: ', props[`stats_week_${this.week}`]);
-        console.log('weeks: ', values.filter(x => x > 0).length);
+        // console.log('min: ', Math.min(...values));
+        // console.log('min: ', Math.max(...values));
+        // console.log('mean: ', props[`stats_week_${this.week}`]);
+        // console.log('weeks: ', values.filter(x => x > 0).length);
 
       });
     });
 
 
+  }
+
+  mean(nums) {
+    return nums.reduce((a, b) => (a + b)) / nums.length;
   }
 
 }

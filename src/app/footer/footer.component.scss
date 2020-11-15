@@ -4,6 +4,10 @@
   right: 0;
   left: 0;
 
+  ::ng-deep .mat-chip-list-wrapper {
+    justify-content: center;
+  }
+
   .mat-chip.mat-standard-chip {
     font-size: 0.6rem;
   }
