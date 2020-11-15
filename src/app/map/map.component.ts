@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import * as M from 'mapbox-gl';
 
 // @ts-ignore
-import * as data from 'src/assets/michigan-hex.json';
+import * as data from 'src/assets/michigan-hex-update.json';
 import { SliderService } from '../footer/slider/slider.service';
 
 @Component({
