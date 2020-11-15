@@ -1,0 +1,24 @@
+<mat-slider
+  class="slider"
+  [value]="week"
+  (input)="onSliderChange($event)"
+  min="1"
+  max="52"
+  tickInterval="1"
+  step="1"
+  thumbLabel="true">
+</mat-slider>
+<div class="months" style="display: flex; padding-right: 1rem; justify-content: space-between;">
+  <span>J</span>
+  <span>F</span>
+  <span>M</span>
+  <span>A</span>
+  <span>M</span>
+  <span>J</span>
+  <span>J</span>
+  <span>A</span>
+  <span>S</span>
+  <span>O</span>
+  <span>N</span>
+  <span>D</span>
+</div>
