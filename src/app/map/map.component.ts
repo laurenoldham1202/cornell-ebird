@@ -17,6 +17,8 @@ export class MapComponent implements OnInit {
 
   data = (data as any).default;
 
+  week: number;
+
   constructor(
     private sliderService: SliderService,
   ) { }
@@ -76,6 +78,7 @@ export class MapComponent implements OnInit {
       // console.log(this.map.getSource('birds'));
 
       this.sliderService.week$.subscribe((week: number) => {
+        this.week = week;
         // console.log(this.data.features[10]);
         // console.log(this.data.features[10].properties[`stats_week_${week}`]);
         // 0 - 3.4
@@ -104,11 +107,28 @@ export class MapComponent implements OnInit {
             '#1e078d'
           ]);
 
+        // TODO make fn for stats_week
         this.map.setFilter('birds', ['>', `stats_week_${week}`, 0]);
 
       });
 
 
+      this.map.on('click', 'birds', (e) => {
+        console.log(e.features[0].properties);
+        const props = e.features[0].properties;
+        const values = [];
+        Object.entries(props).forEach(([key, value]) => {
+          if (key !== 'id') {
+            values.push(value);
+          }
+        });
+
+        console.log('min: ', Math.min(...values));
+        console.log('min: ', Math.max(...values));
+        console.log('mean: ', props[`stats_week_${this.week}`]);
+        console.log('weeks: ', values.filter(x => x > 0).length);
+
+      });
     });
 
 
