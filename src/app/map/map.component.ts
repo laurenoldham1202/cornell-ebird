@@ -26,7 +26,7 @@ export class MapComponent implements OnInit {
 
     this.map = new M.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+      style: 'mapbox://styles/mapbox/dark-v10', // stylesheet location
       center: { lon: -86.76249, lat: 45.10906 },
       zoom: 4.60,
     });
@@ -52,7 +52,7 @@ export class MapComponent implements OnInit {
             0,
             'transparent',
             0.15,
-            '#f1a43a',
+            '#fec027',
             0.43,
             '#e4874e',
             0.66,
@@ -87,7 +87,7 @@ export class MapComponent implements OnInit {
             0,
             'transparent',
             0.15,
-            '#f1a43a',
+            '#fec027',
             0.43,
             '#e4874e',
             0.66,
