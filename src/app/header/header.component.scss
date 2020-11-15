@@ -1,6 +1,16 @@
 .header {
   background: #a43580;
-  width: 100%;
+  //width: 100%;
   padding: 0.5rem;
   text-align: center;
+}
+
+// ['#fec027', '#f1a43a', '#e4874e', '#d76862', '#c7457a', '#a43580', '#7e2884', '#561a88', '#1e078d']
+
+.legend {
+  margin: 0.5rem;
+  height: 0.75rem;
+  background: linear-gradient(to right, #fec027 0%, #f1a43a 11%, #e4874e 22%, #d76862 33%, #d76862 44%, #c7457a 55%, #a43580 66%, #7e2884 77%, #561a88 88%, #1e078d 100%);
+  border: 1px solid #EEE;
+
 }
