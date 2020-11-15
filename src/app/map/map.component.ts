@@ -120,13 +120,12 @@ export class MapComponent implements OnInit {
         });
 
         const highlights = {
-          min: Math.min(...values).toFixed(3),
+          min: Math.min(...values).toFixed(3), // TODO Use different value for no hex - % coverage? peak week?
           max: Math.max(...values).toFixed(3),
           count: week,
           mean: this.mean(values).toFixed(3),
           hexSelected: false,
         };
-        // console.log(highlights);
         this.mapService.updateHighlights(highlights);
 
       });
@@ -141,6 +140,16 @@ export class MapComponent implements OnInit {
             values.push(value);
           }
         });
+
+        // const highlights = {
+        //   min: Math.min(...values).toFixed(3),
+        //   max: Math.max(...values).toFixed(3),
+        //   count: values.filter(x => x > 0).length,
+        //   mean: this.mean(values).toFixed(3),
+        //   hexSelected: true,
+        // };
+        // this.mapService.updateHighlights(highlights);
+
 
         // console.log('min: ', Math.min(...values));
         // console.log('min: ', Math.max(...values));
