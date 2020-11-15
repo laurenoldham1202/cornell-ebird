@@ -50,7 +50,7 @@ export class MapComponent implements OnInit {
             ['linear'],
             ['get', 'stats_week_1'],  // default at 1 week
             0,
-            '#fec027',
+            'transparent',
             0.15,
             '#f1a43a',
             0.43,
@@ -71,6 +71,8 @@ export class MapComponent implements OnInit {
         }
       });
 
+      this.map.setFilter('birds', ['>', 'stats_week_1', 0]);
+
       console.log(this.map.getSource('birds'));
 
       this.sliderService.week$.subscribe((week: number) => {
@@ -83,7 +85,7 @@ export class MapComponent implements OnInit {
             ['linear'],
             ['get', `stats_week_${week}`],
             0,
-            '#fec027',
+            'transparent',
             0.15,
             '#f1a43a',
             0.43,
@@ -100,8 +102,13 @@ export class MapComponent implements OnInit {
             '#561a88',
             3.4,
             '#1e078d'
-          ])
+          ]);
+
+        this.map.setFilter('birds', ['>', `stats_week_${week}`, 0]);
+
       });
+
+
     });
 
 
