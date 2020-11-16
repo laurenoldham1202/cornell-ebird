@@ -10,5 +10,10 @@
 
   .mat-chip.mat-standard-chip {
     font-size: 0.6rem;
+
+    &.mat-accent {
+      width: 6.5rem;
+      justify-content: center;
+    }
   }
 }

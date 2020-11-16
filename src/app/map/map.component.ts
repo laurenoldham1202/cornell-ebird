@@ -115,16 +115,21 @@ export class MapComponent implements OnInit {
 
 
 
-        const weekMs = 60 * 60 * 1000 * 24 * 7;
-        const date = new Date(2018, 0, 4);
-        console.log(date.toLocaleDateString());
-        console.log(new Date(date.getTime() + (weekMs * this.week)).toLocaleDateString());
+        // const weekMs = 60 * 60 * 1000 * 24 * 7;
+        // const date = new Date(2018, 0, 4);
+        // if (this.week === 1) {
+        //   console.log(this.week, date.toLocaleDateString());
+        // } else {
+        //   console.log(weekMs);
+        //   console.log(weekMs*this.week);
+        //   console.log(this.week, new Date(date.getTime() + (weekMs * (this.week - 1))).toLocaleDateString());
+        // }
 
         const highlights = {
           min: Math.min(...values).toFixed(3), // TODO Use different value for no hex - % coverage? peak week?
           max: Math.max(...values).toFixed(3),
           // count: week,
-          count: new Date(2018, 0, 4).toLocaleDateString(),
+          count: this.convertWeekToDate(),
           mean: this.mean(values).toFixed(3),
           hexSelected: false,
         };
@@ -160,8 +165,20 @@ export class MapComponent implements OnInit {
 
       });
     });
+  }
 
-
+  convertWeekToDate() {
+    const weekMs = 60 * 60 * 1000 * 24 * 7;
+    const anchorDate = new Date(2018, 0, 4);
+    const date = this.week === 1 ? anchorDate : new Date(anchorDate.getTime() + (weekMs * (this.week - 1)));
+    return date.toLocaleDateString();
+    // if (this.week === 1) {
+    //   console.log(this.week, anchorDate.toLocaleDateString());
+    // } else {
+    //   console.log(weekMs);
+    //   console.log(weekMs*this.week);
+    //   console.log(this.week, new Date(anchorDate.getTime() + (weekMs * (this.week - 1))).toLocaleDateString());
+    // }
   }
 
   mean(nums) {
