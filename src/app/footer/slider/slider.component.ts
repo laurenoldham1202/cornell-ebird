@@ -42,7 +42,7 @@ export class SliderComponent implements OnInit {
       if (this.activePlay) {
         // reset to week 1 automatically when final week is reached
         if (this.week > 51) {
-          this.week = 1;
+          this.week = 0;
         }
         // add to current week count
         this.week++;

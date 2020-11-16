@@ -113,17 +113,24 @@ export class MapComponent implements OnInit {
           values.push(feature.properties[`stats_week_${week}`]);
         });
 
+
+
+        const weekMs = 60 * 60 * 1000 * 24 * 7;
+        const date = new Date(2018, 0, 4);
+        console.log(date.toLocaleDateString());
+        console.log(new Date(date.getTime() + (weekMs * this.week)).toLocaleDateString());
+
         const highlights = {
           min: Math.min(...values).toFixed(3), // TODO Use different value for no hex - % coverage? peak week?
           max: Math.max(...values).toFixed(3),
-          count: week,
+          // count: week,
+          count: new Date(2018, 0, 4).toLocaleDateString(),
           mean: this.mean(values).toFixed(3),
           hexSelected: false,
         };
         this.mapService.updateHighlights(highlights);
 
       });
-
 
       // TODO change birds layer cursor
       this.map.on('click', 'birds', (e) => {
