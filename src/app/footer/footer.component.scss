@@ -17,3 +17,15 @@
     }
   }
 }
+
+@media (min-width: 500px) {
+  .footer {
+    .mat-chip.mat-standard-chip {
+      font-size: 0.8rem;
+
+      &.mat-accent {
+        width: 7.5rem;
+      }
+    }
+  }
+}

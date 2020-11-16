@@ -1,6 +1,4 @@
 .header {
-  //background: #a43580;
-  //width: 100%;
   padding: 0.5rem;
   text-align: center;
 }
@@ -12,5 +10,23 @@
   height: 0.75rem;
   background: linear-gradient(to right, #fec027 0%, #f1a43a 11%, #e4874e 22%, #d76862 33%, #d76862 44%, #c7457a 55%, #a43580 66%, #7e2884 77%, #561a88 88%, #1e078d 100%);
   border: 1px solid #EEE;
+}
 
+.legend-details {
+  display: flex;
+  margin: 0 0.5rem;
+  font-size: 0.6rem;
+  line-height: 0.6rem;
+}
+
+@media (min-width: 500px) {
+  .header {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+
+  .legend-details {
+    font-size: 0.85rem;
+    line-height: 0.85rem;
+  }
 }

@@ -5,6 +5,12 @@
   //bottom: 5rem; /* Be sure to add mapbox styles to index.html or angular.json so plaintext copyright doesn't display below map! */
   bottom: 7rem; /* Be sure to add mapbox styles to index.html or angular.json so plaintext copyright doesn't display below map! */
   width: 100%;
-  //right: 0;
-  //left: 0;
+
+}
+
+@media (min-width: 500px) {
+  #map {
+    top: 7rem;
+    bottom: 10rem;
+  }
 }
