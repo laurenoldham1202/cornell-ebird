@@ -31,8 +31,8 @@ export class MapComponent implements OnInit {
     this.map = new M.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v10', // stylesheet location
-      center: { lon: -86.76249, lat: 45.10906 },
-      zoom: 4.60,
+      center: { lon: -86.26249, lat: 44.90906 },
+      zoom: 4.80,
     });
 
     this.map.on('style.load', () => {
@@ -113,18 +113,6 @@ export class MapComponent implements OnInit {
           values.push(feature.properties[`stats_week_${week}`]);
         });
 
-
-
-        // const weekMs = 60 * 60 * 1000 * 24 * 7;
-        // const date = new Date(2018, 0, 4);
-        // if (this.week === 1) {
-        //   console.log(this.week, date.toLocaleDateString());
-        // } else {
-        //   console.log(weekMs);
-        //   console.log(weekMs*this.week);
-        //   console.log(this.week, new Date(date.getTime() + (weekMs * (this.week - 1))).toLocaleDateString());
-        // }
-
         const highlights = {
           min: Math.min(...values).toFixed(3), // TODO Use different value for no hex - % coverage? peak week?
           max: Math.max(...values).toFixed(3),
@@ -172,13 +160,6 @@ export class MapComponent implements OnInit {
     const anchorDate = new Date(2018, 0, 4);
     const date = this.week === 1 ? anchorDate : new Date(anchorDate.getTime() + (weekMs * (this.week - 1)));
     return date.toLocaleDateString();
-    // if (this.week === 1) {
-    //   console.log(this.week, anchorDate.toLocaleDateString());
-    // } else {
-    //   console.log(weekMs);
-    //   console.log(weekMs*this.week);
-    //   console.log(this.week, new Date(anchorDate.getTime() + (weekMs * (this.week - 1))).toLocaleDateString());
-    // }
   }
 
   mean(nums) {
