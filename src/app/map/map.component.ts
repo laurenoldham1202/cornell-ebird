@@ -48,69 +48,19 @@ export class MapComponent implements OnInit {
         'source': 'birds',
         'paint': {
           'fill-opacity': 0.95,
-          'fill-color': [
-            'interpolate',
-            ['linear'],
-            ['get', 'stats_week_1'],  // default at 1 week
-            0,
-            'transparent',
-            0.15,
-            '#fec027',
-            0.43,
-            '#e4874e',
-            0.66,
-            '#d76862',
-            0.89,
-            '#c7457a',
-            1.18,
-            '#a43580',
-            1.61,
-            '#7e2884',
-            2.09,
-            '#561a88',
-            3.4,
-            '#1e078d'
-          ],
+          'fill-color': this.setFillColor(),
         }
       });
 
-      this.map.setFilter('birds', ['>', 'stats_week_1', 0]);
 
       this.sliderService.week$.subscribe((week: number) => {
         this.week = week;
-        this.map.setPaintProperty('birds', 'fill-color',
-          [
-            'interpolate',
-            ['linear'],
-            ['get', `stats_week_${week}`],
-            0,
-            'transparent',
-            0.15,
-            '#fec027',
-            0.43,
-            '#e4874e',
-            0.66,
-            '#d76862',
-            0.89,
-            '#c7457a',
-            1.18,
-            '#a43580',
-            1.61,
-            '#7e2884',
-            2.09,
-            '#561a88',
-            3.4,
-            '#1e078d'
-          ]);
-
-        // TODO make fn for stats_week
-        this.map.setFilter('birds', ['>', `stats_week_${week}`, 0]);
+        this.map.setPaintProperty('birds', 'fill-color', this.setFillColor());
+        this.map.setFilter('birds', ['>', this.getSelectedWeek(), 0]);
 
         const values = [];
-        // console.log(this.data);
         this.data.features.forEach(feature => {
-          // console.log(feature.properties);
-          values.push(feature.properties[`stats_week_${week}`]);
+          values.push(feature.properties[this.getSelectedWeek()]);
         });
 
         const highlights = {
@@ -153,6 +103,36 @@ export class MapComponent implements OnInit {
 
       });
     });
+  }
+
+  getSelectedWeek() {
+    return `stats_week_${this.week}`;
+  }
+
+  setFillColor() {
+    return [
+      'interpolate',
+      ['linear'],
+      ['get', this.getSelectedWeek()],  // default at 1 week
+      0,
+      'transparent',
+      0.15,
+      '#fec027',
+      0.43,
+      '#e4874e',
+      0.66,
+      '#d76862',
+      0.89,
+      '#c7457a',
+      1.18,
+      '#a43580',
+      1.61,
+      '#7e2884',
+      2.09,
+      '#561a88',
+      3.4,
+      '#1e078d'
+    ] as M.Expression;
   }
 
   convertWeekToDate() {
