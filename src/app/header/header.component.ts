@@ -66,7 +66,8 @@ export class HeaderComponent implements OnInit {
       ]
     },
     ];
-  view: any[] = [500, 250];
+  view: any[] = [10, 10];
+  // view: any[] = [500, 250];  // 560 310
 
   // options
   legend: boolean = false;
