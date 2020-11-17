@@ -1,18 +1,18 @@
 <div class="footer">
-  <div class="tmp" style="margin-bottom: -4rem;" *ngIf="screenWidth > 800">
-  <ngx-charts-line-chart
-    [view]="view"
-    [scheme]="colorScheme"
-    [legend]="legend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxis]="xAxis"
-    [yAxis]="yAxis"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [timeline]="timeline"
-    [results]="dataSeries">
-  </ngx-charts-line-chart>
+  <div class="chart" *ngIf="screenWidth > 800">
+    <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="dataSeries">
+    </ngx-charts-line-chart>
   </div>
 <br>
   <mat-chip-list *ngIf="highlights">

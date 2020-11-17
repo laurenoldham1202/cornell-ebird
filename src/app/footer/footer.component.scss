@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
 
+  .chart {
+    margin-bottom: -4rem;
+  }
+
   ::ng-deep .mat-chip-list-wrapper {
     justify-content: center;
   }

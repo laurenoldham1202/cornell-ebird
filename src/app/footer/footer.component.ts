@@ -26,13 +26,13 @@ export class FooterComponent implements OnInit {
   // options
   legend: boolean = false;
   showLabels: boolean = false;
-  animations: boolean = true;
+  animations: boolean = false;
   xAxis: boolean = false;
   yAxis: boolean = false;
   showYAxisLabel: boolean = false;
   showXAxisLabel: boolean = false;
-  xAxisLabel: string = '';
-  yAxisLabel: string = '';
+  xAxisLabel: string = 'Week';
+  yAxisLabel: string = 'Abundance';
   timeline: boolean = true;
 
   colorScheme = {
