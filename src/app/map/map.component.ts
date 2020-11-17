@@ -20,6 +20,9 @@ export class MapComponent implements OnInit {
 
   week: number;
 
+  screenWidth = window.outerWidth;
+  stateBounds = {type: 'Polygon', coordinates: []};
+
   constructor(
     private mapService: MapService,
     private sliderService: SliderService,
@@ -54,15 +57,13 @@ export class MapComponent implements OnInit {
 
       // console.log(this.map.getLayer('birds'));
       console.log(this.map.getSource('birds')['_data']);
-      const geometry = {type: 'Polygon', coordinates: []};
+      // const geometry = {type: 'Polygon', coordinates: []};
 
       this.map.getSource('birds')['_data'].features.forEach(feature => {
-        geometry.coordinates.push(feature.geometry.coordinates[0][0]);
+        this.stateBounds.coordinates.push(feature.geometry.coordinates[0][0]);
       });
 
-      console.log(geometry);
-      this.map.fitBounds(T.bbox(geometry) as M.LngLatBoundsLike,
-        { padding: {left: 500, top: 100, bottom: 100, right: 0} });
+      this.fitBbox(this.stateBounds, this.screenWidth <= 800);
 
       this.sliderService.week$.subscribe((week: number) => {
         this.week = week;
@@ -157,13 +158,16 @@ export class MapComponent implements OnInit {
     return nums.reduce((a, b) => (a + b)) / nums.length;
   }
 
+  fitBbox(geometry, smallScreen = true) {
+    const padding = smallScreen ? {left: 0, top: 0, bottom: 0, right: 0} : {left: 500, top: 100, bottom: 100, right: 0};
+    console.log(padding);
+    this.map.fitBounds(T.bbox(geometry) as M.LngLatBoundsLike, { padding: padding });
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-     if (event.target.outerWidth > 800) {
-       // this.map.fitBounds()
-       // this.map.setCenter()
-     }
+    // TODO adjust 800px minwidth
+    this.fitBbox(this.stateBounds, event.target.outerWidth <= 800);
   }
 
 }
