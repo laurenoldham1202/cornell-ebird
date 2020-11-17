@@ -96,10 +96,10 @@ export class MapComponent implements OnInit {
         // this.mapService.updateHighlights(highlights);
 
 
-        // console.log('min: ', Math.min(...values));
-        // console.log('min: ', Math.max(...values));
-        // console.log('mean: ', props[`stats_week_${this.week}`]);
-        // console.log('weeks: ', values.filter(x => x > 0).length);
+        console.log('min: ', Math.min(...values));
+        console.log('max: ', Math.max(...values));
+        console.log('mean: ', props[`stats_week_${this.week}`]);
+        console.log('weeks: ', values.filter(x => x > 0).length);
 
       });
     });

@@ -1,19 +1,19 @@
 <div class="footer">
-  <div class="chart" *ngIf="screenWidth > 800">
-    <ngx-charts-line-chart
-      [view]="view"
-      [scheme]="colorScheme"
-      [legend]="legend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxis]="xAxis"
-      [yAxis]="yAxis"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      [timeline]="timeline"
-      [results]="dataSeries">
-    </ngx-charts-line-chart>
-  </div>
+<!--  <div class="chart" *ngIf="screenWidth > 800">-->
+<!--    <ngx-charts-line-chart-->
+<!--      [view]="view"-->
+<!--      [scheme]="colorScheme"-->
+<!--      [legend]="legend"-->
+<!--      [showXAxisLabel]="showXAxisLabel"-->
+<!--      [showYAxisLabel]="showYAxisLabel"-->
+<!--      [xAxis]="xAxis"-->
+<!--      [yAxis]="yAxis"-->
+<!--      [xAxisLabel]="xAxisLabel"-->
+<!--      [yAxisLabel]="yAxisLabel"-->
+<!--      [timeline]="timeline"-->
+<!--      [results]="dataSeries">-->
+<!--    </ngx-charts-line-chart>-->
+<!--  </div>-->
 <br>
   <mat-chip-list *ngIf="highlights">
     <mat-chip color="accent" selected>WEEK {{highlights.count}}</mat-chip> <!-- visible x weeks when selected -->
