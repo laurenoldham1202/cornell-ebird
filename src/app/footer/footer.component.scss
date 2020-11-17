@@ -24,8 +24,16 @@
       font-size: 0.8rem;
 
       &.mat-accent {
-        width: 7.5rem;
+        width: 8rem;
       }
     }
+  }
+}
+
+
+@media (min-width: 800px) {
+  .footer {
+    max-width: 850px;
+    margin: 0 auto;
   }
 }

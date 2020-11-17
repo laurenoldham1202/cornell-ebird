@@ -14,59 +14,9 @@ export class HeaderComponent implements OnInit {
     {name: 'max', series: []},
   ];
 
-  data = [
-    {
-      "name": "mean",
-      "series": [
-        {
-          "value": 0.3,
-          "name": "a"
-        },
-        {
-          "value": 0.5,
-          "name": "b"
-        },
-        {
-          "value": 1.5,
-          "name": "c"
-        },
-        {
-          "value": 0.75,
-          "name": "d"
-        },
-        {
-          "value": 0.3,
-          "name": "e"
-        }
-      ]
-    },
-    {
-      "name": "min",
-      "series": [
-        {
-          "value": 0.03,
-          "name": "a"
-        },
-        {
-          "value": 0.15,
-          "name": "b"
-        },
-        {
-          "value": 1.05,
-          "name": "c"
-        },
-        {
-          "value": 0.795,
-          "name": "d"
-        },
-        {
-          "value": 0.23,
-          "name": "e"
-        }
-      ]
-    },
-    ];
-  view: any[] = [10, 10];
+
+  // TODO hide on small screen sizes
+  view: any[] = [90, 90];
   // view: any[] = [500, 250];  // 560 310
 
   // options
@@ -88,13 +38,9 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // console.log(this.dataSeries.filter(x => x.name === 'mean')[0]['series']);
-    // console.log(...this.dataSeries)
 
     const keys = Object.keys(this.data2.features[0].properties);
     keys.splice(keys.indexOf('id'), 1);
-    // console.log(keys);
-    const values = [];
     const vals = {};
 
     const mean = this.dataSeries.filter(x => x.name === 'mean')[0]['series'];
@@ -111,32 +57,6 @@ export class HeaderComponent implements OnInit {
       max.push({value: Math.max(...vals[key]), name: key});
       min.push({value: Math.min(...vals[key]), name: key});
       mean.push({value: this.mean(vals[key]), name: key});
-    });
-
-    console.log(this.dataSeries);
-    // console.log(vals);
-
-    this.data2.features.forEach(feature => {
-      // keys.forEach(key => {
-      //   values.push(feature.properties[key]);
-      // });
-      // dataSeries = [
-      //   {name: 'mean', series: []},
-      //   {name: 'min', series: []},
-      //   {name: 'max', series: []},
-      // ];
-      // console.log(feature.properties);
-      const props = feature.properties;
-      // console.log(props);
-
-      // Object.entries(props).forEach(([key, value]) => {
-      //   if (key !== 'id') {
-      //     console.log(key);
-      //     // mean.push({name: key, value: value});
-      //
-      //   }
-      // });
-
     });
 
   }
