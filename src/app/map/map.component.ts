@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 
 import * as M from 'mapbox-gl';
-
+import * as T from '@turf/turf';
 // @ts-ignore
 import * as data from 'src/assets/michigan-hex-update.json';
 import { SliderService } from '../footer/slider/slider.service';
@@ -52,6 +52,17 @@ export class MapComponent implements OnInit {
         }
       });
 
+      // console.log(this.map.getLayer('birds'));
+      console.log(this.map.getSource('birds')['_data']);
+      const geometry = {type: 'Polygon', coordinates: []};
+
+      this.map.getSource('birds')['_data'].features.forEach(feature => {
+        geometry.coordinates.push(feature.geometry.coordinates[0][0]);
+      });
+
+      console.log(geometry);
+      this.map.fitBounds(T.bbox(geometry) as M.LngLatBoundsLike,
+        { padding: {left: 500, top: 100, bottom: 100, right: 0} });
 
       this.sliderService.week$.subscribe((week: number) => {
         this.week = week;
@@ -144,6 +155,15 @@ export class MapComponent implements OnInit {
 
   mean(nums) {
     return nums.reduce((a, b) => (a + b)) / nums.length;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+     if (event.target.outerWidth > 800) {
+       // this.map.fitBounds()
+       // this.map.setCenter()
+     }
   }
 
 }

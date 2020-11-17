@@ -3,23 +3,18 @@
   top: 5.5rem;
   bottom: 7rem; /* Be sure to add mapbox styles to index.html or angular.json so plaintext copyright doesn't display below map! */
   width: 100%;
-  //max-width: 850px;
-  //margin: 0 auto;
 }
 
 .row {
   display: flex;
 }
 
-
 .box {
   background: #343333;
   border: 1px solid #eee;
   width: 50%;
-  //height: 5rem;
   margin: 0.5rem;
   border-radius: 10px;
-  //padding: 0.5rem;
   text-align: center;
 
   .content {
@@ -55,22 +50,14 @@
     right: 0;
     left: 0;
     z-index: -1;
-    //top: 6rem;
-    //bottom: 23rem;
-    //// TODO fix for midsize screens
-    //right: 10rem;
-    //left: 10rem;
     width: auto;
-    border: 1px solid rgba(255,255,255,0.5);
   }
 
-
-  .tmp {
+  .info-panel {
     position: absolute;
     top: calc(10% + 118px + 1rem);
     left: 1.5rem;
     background: #1A1A1B;
-    //height: 22rem;
     width: 31rem;
     border-radius: 10px;
     padding: 1rem;
