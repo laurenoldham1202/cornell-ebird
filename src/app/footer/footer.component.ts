@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {MapService} from '../map/map.service';
 import * as data from '../../assets/michigan-hex-update.json';
 
@@ -39,6 +39,8 @@ export class FooterComponent implements OnInit {
     domain: ['#c7457a', '#fec027', '#673ab7']
   };
 
+  screenWidth = window.outerWidth;
+
   constructor(
     private mapService: MapService,
   ) { }
@@ -75,5 +77,10 @@ export class FooterComponent implements OnInit {
   // TODO move to shared service
   mean(nums) {
     return nums.reduce((a, b) => (a + b)) / nums.length;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.screenWidth = event.target.outerWidth;
   }
 }
