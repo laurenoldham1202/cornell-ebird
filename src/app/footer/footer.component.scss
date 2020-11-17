@@ -38,8 +38,19 @@
 
 @media (min-width: 800px) {
   .footer {
-    max-width: 850px;
-    margin: 0 auto;
+    bottom: auto;
+    top: calc(10% + 422px + 2rem);
+    left: 1.5rem;
+    //background: purple;
+    background: #343333;
+    border: 1px solid #1A1A1B;
+    border-radius: 10px;
+
+
+
+    width: 31rem;
+    //margin: 0 auto;
+
     .mat-chip.mat-standard-chip {
       &.mat-accent {
         width: 9rem;

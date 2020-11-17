@@ -27,7 +27,12 @@
   }
 
   .header {
-    background: #ffd740; width: 100%; border-radius: 10px 10px 0 0; padding: 0.25rem 0; color: #343333; text-align: center
+    background: #ffd740;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    padding: 0.25rem 0;
+    color: #343333;
+    text-align: center;
   }
 
   h2 {
@@ -62,11 +67,11 @@
 
   .tmp {
     position: absolute;
-    top: 20%;
-    left: 2rem;
-    background: rgba(0, 0, 0, 0.9);
-    height: 22rem;
-    width: 25rem;
+    top: calc(10% + 118px + 1rem);
+    left: 1.5rem;
+    background: #1A1A1B;
+    //height: 22rem;
+    width: 31rem;
     border-radius: 10px;
     padding: 1rem;
   }
