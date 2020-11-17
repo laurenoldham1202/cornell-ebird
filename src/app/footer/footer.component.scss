@@ -3,6 +3,8 @@
   bottom: 0;
   right: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
 
   ::ng-deep .mat-chip-list-wrapper {
     justify-content: center;
@@ -35,5 +37,10 @@
   .footer {
     max-width: 850px;
     margin: 0 auto;
+    .mat-chip.mat-standard-chip {
+      &.mat-accent {
+        width: 9rem;
+      }
+    }
   }
 }
