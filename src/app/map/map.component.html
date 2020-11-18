@@ -1,9 +1,12 @@
-<div id="map"></div>
+<div id="map">
+  <mat-icon style="position: absolute; top: 0.5rem; right: 0.5rem; z-index: 1000; color: rgba(255,255,255,0.35); cursor: pointer;" (click)="displayHelpDialog()">help</mat-icon>
+</div>
 
 <div class="info-panel">
   <div class="info-panel-content" *ngIf="hexHighlights; else noHighlights;">
     <h3>SELECTED HEX #{{hexHighlights.id}}</h3>
 
+    <!-- TODO dynamically change header colors to match values? -->
     <div class="row">
       <div class="box">
         <div class="header">CURRENT VALUE</div>

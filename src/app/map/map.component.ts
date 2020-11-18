@@ -6,6 +6,8 @@ import * as T from '@turf/turf';
 import * as data from 'src/assets/michigan-hex-update.json';
 import { SliderService } from '../footer/slider/slider.service';
 import {MapService} from './map.service';
+import {MatDialog} from '@angular/material/dialog';
+import {HelpDialogComponent} from '../help-dialog/help-dialog.component';
 
 @Component({
   selector: 'app-map',
@@ -27,6 +29,7 @@ export class MapComponent implements OnInit {
   stateHighlights;
 
   constructor(
+    private dialog: MatDialog,
     private mapService: MapService,
     private sliderService: SliderService,
   ) { }
@@ -71,7 +74,7 @@ export class MapComponent implements OnInit {
         this.stateBounds.coordinates.push(feature.geometry.coordinates[0][0]);
       });
 
-      this.fitBbox(this.stateBounds, this.screenWidth <= 800);
+      this.fitBbox(this.stateBounds, this.screenWidth <= 950);
 
       this.sliderService.week$.subscribe((week: number) => {
         this.week = week;
@@ -221,7 +224,12 @@ export class MapComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     // TODO adjust 800px minwidth
-    this.fitBbox(this.stateBounds, event.target.outerWidth <= 800);
+    this.fitBbox(this.stateBounds, event.target.outerWidth <= 950);
+  }
+
+  displayHelpDialog() {
+    console.log('help');
+    this.dialog.open(HelpDialogComponent);
   }
 
 }
