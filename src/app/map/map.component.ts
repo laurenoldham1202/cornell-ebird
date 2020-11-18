@@ -95,6 +95,8 @@ export class MapComponent implements OnInit {
 
       let clickId = null;
       this.map.on('mousemove', 'birds', (e) => {
+        this.map.getCanvas().style.cursor = 'pointer';
+
         if (clickId) {
           this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: false});
         }
@@ -102,7 +104,8 @@ export class MapComponent implements OnInit {
         this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: true});
       });
 
-      this.map.on('mouseleave', 'birds', (e) => {
+      this.map.on('mouseleave', 'birds', () => {
+        this.map.getCanvas().style.cursor = 'grab';
         this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: false});
       });
 
@@ -200,6 +203,7 @@ export class MapComponent implements OnInit {
   fitBbox(geometry, smallScreen = true) {
     const padding = smallScreen ? {left: 0, top: 0, bottom: 0, right: 0} : {left: 500, top: 100, bottom: 100, right: 0};
     this.map.fitBounds(T.bbox(geometry) as M.LngLatBoundsLike, { padding: padding });
+    this.map.resize();
   }
 
   @HostListener('window:resize', ['$event'])
