@@ -1,40 +1,41 @@
 <div id="map"></div>
 
 <div class="info-panel">
-  <div class="info-panel-content" *ngIf="highlights; else noHighlights;">
-    <h3>SELECTED HEX #{{highlights.id}}</h3>
+  <div class="info-panel-content" *ngIf="hexHighlights; else noHighlights;">
+    <h3>SELECTED HEX #{{hexHighlights.id}}</h3>
 
     <div class="row">
       <div class="box">
-        <div class="header">VALUE</div>
+        <div class="header">CURRENT VALUE</div>
         <div class="content">
-          <h2>{{highlights.value}}</h2>
+          <h2>{{hexHighlights.value}}</h2>
           for week of {{convertWeekToDate()}}
 <!--          for week of 1/1/2018-->
         </div>
       </div>
       <div class="box">
-        <div class="header">MEAN</div>
+        <div class="header"> MEAN</div>
         <div class="content">
-          <h2>{{highlights.mean}}</h2>
-          over 52 weeks
-<!--          +0.5 from statewide mean-->
+          <h2>{{hexHighlights.mean}}</h2>
+          abundance avg over 52 weeks
+          <!-- higher than state avg for selected week -->
+<!--          {{ calculateDifference('mean').value}} {{calculateDifference('mean').diffText}} than weekly avg-->
         </div>
       </div>
     </div>
     <div class="row">
       <div class="box">
-        <div class="header">MINIMUM</div>
+        <div class="header"> MINIMUM</div>
         <div class="content">
-          <h2>{{highlights.min}}</h2>
+          <h2>{{hexHighlights.min}}</h2>
           over 52 weeks
 <!--          +0 from statewide min-->
         </div>
       </div>
       <div class="box">
-        <div class="header">MAXIMUM</div>
+        <div class="header"> MAXIMUM</div>
         <div class="content">
-          <h2>{{highlights.max}}</h2>
+          <h2>{{hexHighlights.max}}</h2>
           over 52 weeks
 <!--          +0.5 from statewide max-->
         </div>
@@ -43,5 +44,6 @@
   </div>
   <ng-template #noHighlights>
     <h1>Select a hexbin from the map for more information!</h1>
+
   </ng-template>
 </div>

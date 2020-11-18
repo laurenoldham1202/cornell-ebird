@@ -23,7 +23,8 @@ export class MapComponent implements OnInit {
   screenWidth = window.outerWidth;
   stateBounds = {type: 'Polygon', coordinates: []};
 
-  highlights;
+  hexHighlights;  // TODO type
+  stateHighlights;
 
   constructor(
     private mapService: MapService,
@@ -79,18 +80,20 @@ export class MapComponent implements OnInit {
 
         const values = [];
         this.data.features.forEach(feature => {
+          if (this.hexHighlights?.id === feature.properties.id) {
+            this.hexHighlights.value = feature.properties[this.getSelectedWeek()].toFixed(3);
+          }
           values.push(feature.properties[this.getSelectedWeek()]);
         });
 
-        const highlights = {
+        this.stateHighlights = {
           min: Math.min(...values).toFixed(3), // TODO Use different value for no hex - % coverage? peak week?
           max: Math.max(...values).toFixed(3),
-          // count: week,
           count: this.convertWeekToDate(),
           mean: this.mean(values).toFixed(3),
           hexSelected: false,
         };
-        this.mapService.updateHighlights(highlights);
+        this.mapService.updateHighlights(this.stateHighlights);
       });
 
       let clickId = null;
@@ -114,7 +117,6 @@ export class MapComponent implements OnInit {
 
         // console.log(e.features[0].properties);
         const props = e.features[0].properties;
-        console.log(props);
 
         const values = [];
         Object.entries(props).forEach(([key, value]) => {
@@ -145,8 +147,8 @@ export class MapComponent implements OnInit {
           }
         });
 
-        // TODO UPDATE ON SLIDER
-        this.highlights = {
+        // TODO List weeks associated with max, min
+        this.hexHighlights = {
           id: props.id,
           min: Math.min(...values).toFixed(3),
           max: Math.max(...values).toFixed(3),
@@ -187,6 +189,16 @@ export class MapComponent implements OnInit {
       3.4,
       '#1e078d'
     ] as M.Expression;
+  }
+
+  calculateDifference(field) {
+    const value = (this.hexHighlights[field] - this.stateHighlights[field]).toFixed(3);
+    return {
+      value: value,
+      // @ts-ignore
+      diffText: (value >= 0) ? 'higher' : 'lower',
+    }
+    // return (this.hexHighlights[field] - this.stateHighlights[field]).toFixed(3);
   }
 
   convertWeekToDate() {
