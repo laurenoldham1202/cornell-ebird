@@ -3,8 +3,14 @@
   top: 5.5rem;
   bottom: 7rem; /* Be sure to add mapbox styles to index.html or angular.json so plaintext copyright doesn't display below map! */
   width: 100%;
-  max-width: 850px;
-  margin: 0 auto;
+}
+
+.info-panel {
+  visibility: hidden;
+
+  h3 {
+    text-align: center;
+  }
 }
 
 @media (min-width: 500px) {
@@ -14,14 +20,56 @@
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 950px) {
   #map {
-    top: 6rem;
-    bottom: 23rem;
-    // TODO fix for midsize screens
-    right: 10rem;
-    left: 10rem;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
     width: auto;
-    border: 1px solid rgba(255,255,255,0.5);
   }
+
+  .info-panel {
+    visibility: visible;
+    position: absolute;
+    top: calc(10% + 118px + 1rem);
+    left: 1.5rem;
+    background: #1A1A1B;
+    width: 31rem;
+    border-radius: 10px;
+    padding: 1rem;
+    height: 304px;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .box {
+    background: #343333;
+    border: 1px solid #eee;
+    width: 50%;
+    margin: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+
+    .content {
+      padding: 0.5rem;
+    }
+
+    .header {
+      background: #ffd740;
+      width: 100%;
+      border-radius: 10px 10px 0 0;
+      padding: 0.25rem 0;
+      color: #343333;
+      text-align: center;
+    }
+
+    h2 {
+      margin: 0;
+    }
+  }
+
 }

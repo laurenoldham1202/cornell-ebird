@@ -1,1 +1,52 @@
-<div id="map"></div>
+<div id="map">
+  <mat-icon style="position: absolute; top: 0.5rem; right: 0.5rem; z-index: 1000; color: rgba(255,255,255,0.35); cursor: pointer;" (click)="displayHelpDialog()">help</mat-icon>
+</div>
+
+<div class="info-panel">
+  <div class="info-panel-content" *ngIf="hexHighlights; else noHighlights;">
+    <h3>SELECTED HEX #{{hexHighlights.id}}</h3>
+
+    <!-- TODO dynamically change header colors to match values? -->
+    <div class="row">
+      <div class="box">
+        <div class="header">CURRENT VALUE</div>
+        <div class="content">
+          <h2>{{hexHighlights.value}}</h2>
+          for week of {{convertWeekToDate()}}
+<!--          for week of 1/1/2018-->
+        </div>
+      </div>
+      <div class="box">
+        <div class="header"> MEAN</div>
+        <div class="content">
+          <h2>{{hexHighlights.mean}}</h2>
+          abundance avg over 52 weeks
+          <!-- higher than state avg for selected week -->
+<!--          {{ calculateDifference('mean').value}} {{calculateDifference('mean').diffText}} than weekly avg-->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="box">
+        <div class="header"> MINIMUM</div>
+        <div class="content">
+          <h2>{{hexHighlights.min}}</h2>
+          over 52 weeks
+<!--          +0 from statewide min-->
+        </div>
+      </div>
+      <div class="box">
+        <div class="header"> MAXIMUM</div>
+        <div class="content">
+          <h2>{{hexHighlights.max}}</h2>
+          over 52 weeks
+<!--          +0.5 from statewide max-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noHighlights>
+    <h1>Select a hexbin from the map for more information!</h1>
+
+  </ng-template>
+</div>

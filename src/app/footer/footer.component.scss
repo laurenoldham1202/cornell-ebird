@@ -36,10 +36,16 @@
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 950px) {
   .footer {
-    max-width: 850px;
-    margin: 0 auto;
+    bottom: auto;
+    top: calc(10% + 422px + 2rem);
+    left: 1.5rem;
+    background: #1A1A1B;
+    border: 1px solid #343333;
+    border-radius: 10px;
+    width: 31rem;
+
     .mat-chip.mat-standard-chip {
       &.mat-accent {
         width: 9rem;
