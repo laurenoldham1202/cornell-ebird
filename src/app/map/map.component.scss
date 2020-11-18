@@ -7,6 +7,10 @@
 
 .info-panel {
   visibility: hidden;
+
+  h3 {
+    text-align: center;
+  }
 }
 
 @media (min-width: 500px) {
@@ -35,6 +39,7 @@
     width: 31rem;
     border-radius: 10px;
     padding: 1rem;
+    height: 304px;
   }
 
   .row {

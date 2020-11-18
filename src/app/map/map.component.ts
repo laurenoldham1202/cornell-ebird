@@ -23,6 +23,8 @@ export class MapComponent implements OnInit {
   screenWidth = window.outerWidth;
   stateBounds = {type: 'Polygon', coordinates: []};
 
+  highlights;
+
   constructor(
     private mapService: MapService,
     private sliderService: SliderService,
@@ -89,33 +91,19 @@ export class MapComponent implements OnInit {
           hexSelected: false,
         };
         this.mapService.updateHighlights(highlights);
-
       });
 
       let clickId = null;
       this.map.on('mousemove', 'birds', (e) => {
-        // if (e.features.length > 0) {
-        //   if (hoveredStateId) {
-        //     map.setFeatureState(
-        //       { source: 'states', id: hoveredStateId },
-        //       { hover: false }
-        //     );
-        //   }
-        //   hoveredStateId = e.features[0].id;
-        //   map.setFeatureState(
-        //     { source: 'states', id: hoveredStateId },
-        //     { hover: true }
-        //   );
-        // }
-        console.log(e.features[0].id);
-
         if (clickId) {
           this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: false});
         }
         clickId = e.features[0].properties.id;
         this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: true});
+      });
 
-
+      this.map.on('mouseleave', 'birds', (e) => {
+        this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: false});
       });
 
       // TODO change birds layer cursor
@@ -123,13 +111,14 @@ export class MapComponent implements OnInit {
 
         // console.log(e.features[0].properties);
         const props = e.features[0].properties;
+        console.log(props);
+
         const values = [];
         Object.entries(props).forEach(([key, value]) => {
           if (key !== 'id') {
             values.push(value);
           }
         });
-
 
         const source = this.map.getSource('hex') as M.GeoJSONSource;
 
@@ -149,28 +138,19 @@ export class MapComponent implements OnInit {
                   'line-opacity': 0.8,
                 }
               });
-
             }
-
-            //
-            // this.map.getLayer('hex')
-
           }
         });
-        // const highlights = {
-        //   min: Math.min(...values).toFixed(3),
-        //   max: Math.max(...values).toFixed(3),
-        //   count: values.filter(x => x > 0).length,
-        //   mean: this.mean(values).toFixed(3),
-        //   hexSelected: true,
-        // };
-        // this.mapService.updateHighlights(highlights);
 
-
-        // console.log('min: ', Math.min(...values));
-        // console.log('max: ', Math.max(...values));
-        // console.log('mean: ', props[`stats_week_${this.week}`]);
-        // console.log('weeks: ', values.filter(x => x > 0).length);
+        // TODO UPDATE ON SLIDER
+        this.highlights = {
+          id: props.id,
+          min: Math.min(...values).toFixed(3),
+          max: Math.max(...values).toFixed(3),
+          count: values.filter(x => x > 0).length,
+          mean: this.mean(values).toFixed(3),
+          value: props[this.getSelectedWeek()].toFixed(3),
+        };
 
       });
     });

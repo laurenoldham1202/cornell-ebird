@@ -1,39 +1,47 @@
 <div id="map"></div>
 
 <div class="info-panel">
-  <h3>SELECTED HEX #54</h3>
+  <div class="info-panel-content" *ngIf="highlights; else noHighlights;">
+    <h3>SELECTED HEX #{{highlights.id}}</h3>
 
-  <div class="row">
-    <div class="box">
-      <div class="header">VALUE</div>
-      <div class="content">
-        <h2>0.05</h2>
-        for week of 1/1/2018
+    <div class="row">
+      <div class="box">
+        <div class="header">VALUE</div>
+        <div class="content">
+          <h2>{{highlights.value}}</h2>
+          for week of {{convertWeekToDate()}}
+<!--          for week of 1/1/2018-->
+        </div>
+      </div>
+      <div class="box">
+        <div class="header">MEAN</div>
+        <div class="content">
+          <h2>{{highlights.mean}}</h2>
+          over 52 weeks
+<!--          +0.5 from statewide mean-->
+        </div>
       </div>
     </div>
-    <div class="box">
-      <div class="header">MEAN</div>
-      <div class="content">
-        <h2>0.14</h2>
-        +0.5 from statewide mean
+    <div class="row">
+      <div class="box">
+        <div class="header">MINIMUM</div>
+        <div class="content">
+          <h2>{{highlights.min}}</h2>
+          over 52 weeks
+<!--          +0 from statewide min-->
+        </div>
+      </div>
+      <div class="box">
+        <div class="header">MAXIMUM</div>
+        <div class="content">
+          <h2>{{highlights.max}}</h2>
+          over 52 weeks
+<!--          +0.5 from statewide max-->
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="box">
-      <div class="header">MINIMUM</div>
-      <div class="content">
-        <h2>0.00</h2>
-        +0 from statewide min
-      </div>
-    </div>
-    <div class="box">
-      <div class="header">MAXIMUM</div>
-      <div class="content">
-        <h2>0.63</h2>
-        +0.5 from statewide max
-      </div>
-    </div>
-  </div>
-
+  <ng-template #noHighlights>
+    <h1>Select a hexbin from the map for more information!</h1>
+  </ng-template>
 </div>
