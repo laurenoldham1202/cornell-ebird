@@ -38,11 +38,18 @@ export class MapComponent implements OnInit {
       zoom: 4.80,
     });
 
+    this.data.features.forEach(feature => {
+      feature.id = feature.properties.id;
+    });
+
     this.map.on('style.load', () => {
       this.map.addSource('birds', {
         type: 'geojson',
         data: this.data,
       });
+
+      // instantiate empty geojson for clicked footprints
+      this.map.addSource('hex', {type: 'geojson', data: {type: 'FeatureCollection', features: [ ]}});
 
       // ['#fec027', '#f1a43a', '#e4874e', '#d76862', '#c7457a', '#a43580', '#7e2884', '#561a88', '#1e078d']
       this.map.addLayer({
@@ -50,14 +57,12 @@ export class MapComponent implements OnInit {
         'type': 'fill',
         'source': 'birds',
         'paint': {
-          'fill-opacity': 0.95,
+          'fill-opacity': 0.8,
           'fill-color': this.setFillColor(),
+          'fill-outline-color': ['case', ['boolean', ['feature-state', 'clicked'], false], '#EEE', 'transparent'],
+          // 'fill-opacity': ['case', ['boolean', ['feature-state', 'clicked'], false], 1, 0.75],
         }
       });
-
-      // console.log(this.map.getLayer('birds'));
-      console.log(this.map.getSource('birds')['_data']);
-      // const geometry = {type: 'Polygon', coordinates: []};
 
       this.map.getSource('birds')['_data'].features.forEach(feature => {
         this.stateBounds.coordinates.push(feature.geometry.coordinates[0][0]);
@@ -87,8 +92,35 @@ export class MapComponent implements OnInit {
 
       });
 
+      let clickId = null;
+      this.map.on('mousemove', 'birds', (e) => {
+        // if (e.features.length > 0) {
+        //   if (hoveredStateId) {
+        //     map.setFeatureState(
+        //       { source: 'states', id: hoveredStateId },
+        //       { hover: false }
+        //     );
+        //   }
+        //   hoveredStateId = e.features[0].id;
+        //   map.setFeatureState(
+        //     { source: 'states', id: hoveredStateId },
+        //     { hover: true }
+        //   );
+        // }
+        console.log(e.features[0].id);
+
+        if (clickId) {
+          this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: false});
+        }
+        clickId = e.features[0].properties.id;
+        this.map.setFeatureState({source: 'birds', id: clickId}, {clicked: true});
+
+
+      });
+
       // TODO change birds layer cursor
       this.map.on('click', 'birds', (e) => {
+
         // console.log(e.features[0].properties);
         const props = e.features[0].properties;
         const values = [];
@@ -98,6 +130,33 @@ export class MapComponent implements OnInit {
           }
         });
 
+
+        const source = this.map.getSource('hex') as M.GeoJSONSource;
+
+        this.data.features.forEach(feature => {
+          if (feature.properties.id === props.id) {
+            source.setData({type: 'FeatureCollection', features: [feature]});
+
+            // TODO remove style on double click
+            if (!this.map.getLayer('hex')) {
+              this.map.addLayer({
+                id: 'hex',
+                type: 'line',
+                source: 'hex',
+                paint: {
+                  'line-width': 3,
+                  'line-color': '#EEE',
+                  'line-opacity': 0.8,
+                }
+              });
+
+            }
+
+            //
+            // this.map.getLayer('hex')
+
+          }
+        });
         // const highlights = {
         //   min: Math.min(...values).toFixed(3),
         //   max: Math.max(...values).toFixed(3),
@@ -108,10 +167,10 @@ export class MapComponent implements OnInit {
         // this.mapService.updateHighlights(highlights);
 
 
-        console.log('min: ', Math.min(...values));
-        console.log('max: ', Math.max(...values));
-        console.log('mean: ', props[`stats_week_${this.week}`]);
-        console.log('weeks: ', values.filter(x => x > 0).length);
+        // console.log('min: ', Math.min(...values));
+        // console.log('max: ', Math.max(...values));
+        // console.log('mean: ', props[`stats_week_${this.week}`]);
+        // console.log('weeks: ', values.filter(x => x > 0).length);
 
       });
     });
@@ -160,7 +219,6 @@ export class MapComponent implements OnInit {
 
   fitBbox(geometry, smallScreen = true) {
     const padding = smallScreen ? {left: 0, top: 0, bottom: 0, right: 0} : {left: 500, top: 100, bottom: 100, right: 0};
-    console.log(padding);
     this.map.fitBounds(T.bbox(geometry) as M.LngLatBoundsLike, { padding: padding });
   }
 
