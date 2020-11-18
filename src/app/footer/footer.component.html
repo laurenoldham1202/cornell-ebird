@@ -17,9 +17,9 @@
 <br>
   <mat-chip-list *ngIf="highlights">
     <mat-chip color="accent" selected>WEEK {{highlights.count}}</mat-chip> <!-- visible x weeks when selected -->
-    <mat-chip>MIN  {{highlights.min}}</mat-chip>
-    <mat-chip>MAX {{highlights.max}}</mat-chip>
-    <mat-chip color="primary" selected>MEAN {{highlights.mean}}</mat-chip>
+    <mat-chip matTooltipPosition="above" [matTooltip]="'Lowest abundance value for entire state during week of' + highlights.count">MIN  {{highlights.min}}</mat-chip>
+    <mat-chip matTooltipPosition="above" [matTooltip]="'Highest abundance value for entire state during week of' + highlights.count">MAX {{highlights.max}}</mat-chip>
+    <mat-chip matTooltipPosition="above" [matTooltip]="'Average abundance value for entire state during week of' + highlights.count" color="primary" selected>MEAN {{highlights.mean}}</mat-chip>
   </mat-chip-list>
   <app-slider></app-slider>
 </div>
